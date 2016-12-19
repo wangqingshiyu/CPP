@@ -1,0 +1,46 @@
+#include <iostream>
+#include <cstdio>
+#include <string>
+#include <cstring>
+using namespace std;
+
+void f(int x,string st,int y){
+	int len=st.size();
+	int a[20];
+	for(int i=0;i<len;i++){
+		if(st[i]>='0' && st[i]<='9')
+			a[i]=st[i]-'0';
+		if(st[i]>='a' && st[i]<='f')
+			a[i]=st[i]-'a'+10;
+		if(st[i]>='A' && st[i]<='F')
+			a[i]=st[i]-'A'+10;
+	}
+	long long p=0;
+	for(int i=0;i<=len-1;i++){
+		long long t=1;
+		for(int j=1;j<=len-i-1;j++)
+			t*=x;
+		p+=a[i]*t;
+	}
+	int b[20];
+	int k=0;
+	while(p>=y){
+		b[++k]=p%y;
+		p=p/y;
+	}
+	b[++k]=p;
+	for(int i=k;i>=1;i--){
+		if(b[i]>=10)
+			cout<<char(b[i]-10+'A');
+		else
+			cout<<b[i];
+	}
+}
+
+int main(){
+	string s;
+	int a,b;
+	cin>>a>>s>>b;
+	f(a,s,b);
+	return 0;
+}
