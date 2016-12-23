@@ -1,0 +1,36 @@
+#include <cstdio>
+int total=0,n;
+int a[1000];
+bool book[1000]={0};
+
+void print(int p){
+	for(int i=1;i<p;i++)
+		printf("%d ",a[i]);
+	printf("%d\n",a[p]);
+	total++;
+}
+
+void search(int k,int r){
+	for(int j=a[k-1];j<=n;j++){
+		if(!book[j]){
+			a[k]=j;
+			book[j]=1;
+			if(k==r)
+				print(r);
+			else
+				search(k+1,r);
+			book[j]=0;
+		}
+	}
+	return ;
+}
+
+int main(){
+	scanf("%d",&n);
+	a[0]=1;
+	for(int i=1;i<=n;i++){
+		search(1,i);
+	}
+	printf("total=%d",total);
+	return 0;
+}
