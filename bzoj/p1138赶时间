@@ -1,0 +1,36 @@
+#include <cstdio>
+#include <iostream>
+#include <cstring>
+using namespace std;
+int main(){
+	char s1[10],s2[10],s[10];
+	cin>>s1;
+	cin>>s2;
+	int h1,h2,m1,m2,se1,se2;
+	s[0]=s1[0];
+	s[1]=s1[1];
+	sscanf(s,"%d",&h1);
+	s[0]=s1[3];
+	s[1]=s1[4];
+	sscanf(s,"%d",&m1);
+	s[0]=s1[6];
+	s[1]=s1[7];
+	sscanf(s,"%d",&se1);
+	
+	s[0]=s2[0];
+	s[1]=s2[1];
+	sscanf(s,"%d",&h2);
+	s[0]=s2[3];
+	s[1]=s2[4];
+	sscanf(s,"%d",&m2);
+	s[0]=s2[6];
+	s[1]=s2[7];
+	sscanf(s,"%d",&se2);
+	
+	int x,y,ans;
+	x=h1*3600+m1*60+se1;
+	y=h2*3600+m2*60+se2;
+	ans=x-y;
+	cout<<ans;
+	return 0;
+}
