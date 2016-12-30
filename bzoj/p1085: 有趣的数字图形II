@@ -1,0 +1,23 @@
+#include <cstdio>
+int main(){
+	int a[15][15]={0};
+	int n;
+	scanf("%d",&n);
+	for(int i=1;i<=n;i++)
+		a[i][i]=i;
+	for(int k=2;k<=n;k++){
+		int x=1,y;
+		for(y=k;y<=n;x++,y++)
+			a[x][y]=a[x+1][y]+a[x][y-1];
+	}
+	for(int i=1;i<=n;i++){
+		for(int j=1;j<=n;j++){
+			if(a[i][j]==0)
+				printf("     ");//5个空格 
+			else
+				printf("%5d",a[i][j]);
+		}
+		printf("\n");
+	}
+	return 0;
+}
