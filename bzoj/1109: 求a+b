@@ -1,0 +1,30 @@
+#include <cstdio>
+#include <iostream>
+#include <string>
+#include <cstring>
+using namespace std;
+int main(){
+	string s;
+	cin>>s;
+	int len=s.size();
+	int pos1,pos2;
+	for(int i=0;i<len;i++){
+		if(s[i]=='+')
+			pos1=i;
+		if(s[i]=='=')
+			pos2=i;
+	}
+	string s1="",s2="";
+	for(int i=0;i<pos1;i++)
+		s1+=s[i];
+	for(int i=pos1+1;i<pos2;i++)
+		s2+=s[i];
+//	cout<<s1<<endl;
+//	cout<<s2<<endl;
+	long long a,b;
+	sscanf(s1.c_str(),"%lld",&a);
+	sscanf(s2.c_str(),"%lld",&b);
+	cout<<a+b;
+	
+	return 0;
+}
