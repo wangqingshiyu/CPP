@@ -1,0 +1,47 @@
+#include <cstdio>
+#include <iostream>
+using namespace std;
+bool ans;
+int num[10];
+bool book[10]={0};
+int a,b,c;
+
+void print(){
+    int x,y,z;
+    x=num[1]*100+num[2]*10+num[3];
+    y=num[4]*100+num[5]*10+num[6];
+    z=num[7]*100+num[8]*10+num[9];
+    if(x*b==y*a && x*c==z*a){
+        ans=1;
+        for(int i=1;i<=9;i++){
+            printf("%d",num[i]);
+            if(i%3==0)
+                printf(" ");
+        }
+        printf("\n");
+    }
+}
+
+void dps(int x){
+    if(x==10){
+        print();
+        return ;
+    }
+    for(int i=1;i<=9;i++){
+        if(!book[i]){
+            num[x]=i;
+            book[i]=1;
+            dps(x+1);
+            book[i]=0;
+        }
+    }
+}
+
+int main(){
+    cin>>a>>b>>c;
+    ans=0;
+    dps(1);    
+    if(!ans)
+        printf("No!!!");
+    return 0;
+}
