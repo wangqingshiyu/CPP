@@ -1,0 +1,29 @@
+// 快排序的结构体的使用
+#include <cstdio>
+#include <iostream>
+#include <algorithm>
+#include <cstring>
+using namespace std;
+struct stu{
+	string num;
+	double cj;
+};
+stu s[110];
+
+int cmp(const stu &a,const stu &b){
+	if(a.cj>b.cj)
+		return 1;
+	else
+		return 0;
+}
+
+int main(){
+	freopen("data.in","r",stdin);
+	int n,k;
+	scanf("%d %d",&n,&k);
+	for(int i=0;i<n;i++)
+		cin>>s[i].num>>s[i].cj;
+	sort(s+0,s+n,cmp);
+	cout<<s[k-1].num<<' '<<s[k-1].cj;
+	return 0;
+}
