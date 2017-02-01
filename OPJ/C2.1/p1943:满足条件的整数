@@ -1,0 +1,20 @@
+#include <iostream>
+using namespace std;
+int main(){
+	int s[110];
+	bool first=true;
+	for(int i=1;i<=100;i++)
+		s[i]=i*i;
+	for(int a=2;a<=100;a++)
+		for(int b=a;b<=100;b++)
+			for(int c=2;c<=100;c++)
+				if(s[a]+s[b]==s[c]){
+					if(first){
+						printf("%d*%d + %d*%d = %d*%d",a,a,b,b,c,c);		
+						first=false;		
+					}
+					else
+						printf("\n%d*%d + %d*%d = %d*%d",a,a,b,b,c,c);
+				}
+	return 0;
+} 
