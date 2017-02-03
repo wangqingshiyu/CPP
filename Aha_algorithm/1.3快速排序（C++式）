@@ -20,8 +20,6 @@ void qsort(int l , int r){
 			t = a[head] ;
 			a[head] = a[tail] ;
 			a[tail] = t;
-			head ++ ;
-			tail -- ;
 		}
 	}
 	if ( head == tail ){ // 其实循环出来，肯定是等于的，都可以不用If 
