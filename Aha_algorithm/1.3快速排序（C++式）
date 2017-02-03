@@ -1,0 +1,45 @@
+// 快排，C++惯用写法，用第一个为基准 
+#include <cstdio>
+#include <iostream>
+using namespace std;
+const int maxn=10000;
+typedef int DATATYPE;
+DATATYPE a[maxn+10];
+
+void qsort(int l , int r){
+	if ( l >= r)
+		return ;
+	int head = l , tail = r ;
+	DATATYPE t;
+	while ( head < tail ){  // 必须先从右边出发 
+		while ( tail > head && a[tail] >= a[l] )
+			tail -- ;
+		while ( head < tail && a[head] <= a[l] )
+			head ++ ;
+		if ( head < tail ){
+			t = a[head] ;
+			a[head] = a[tail] ;
+			a[tail] = t;
+			head ++ ;
+			tail -- ;
+		}
+	}
+	if ( head == tail ){ // 其实循环出来，肯定是等于的，都可以不用If 
+		t = a[head] ;
+		a[head] = a[l] ;
+		a[l] = t ;
+	}
+	qsort( l , head - 1 ); // head 是上一次的基准位置，因此基准的左边和右边都要分开再快排一次。 
+	qsort( head + 1 , r ) ;
+}
+
+int main(){
+	int n;
+	cin>>n;
+	for(int i=1;i<=n;i++)
+		cin>>a[i];
+	qsort(1,n);
+	for(int i=1;i<=n;i++)
+		cout<<a[i]<<" ";
+	return 0;
+} 
