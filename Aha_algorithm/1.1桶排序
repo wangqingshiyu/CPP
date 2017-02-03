@@ -1,0 +1,26 @@
+// 1.1 桶排序 
+#include <cstdio>
+#include <iostream>
+#include <cstring>
+using namespace std;
+const int maxn=10000;
+int a[maxn+10];
+int main(){
+	memset(a,0,sizeof(a));//初始化桶为0 
+	int n;
+	printf("本程序为桶排序方法，输入N个不大于10000的正整数\n请输入个数N: ");
+	scanf("%d",&n);
+	printf("请输入 %d 个不大于 %d 的正整数\n",n,maxn);
+	int x;
+	for(int i=1;i<=n;i++){
+		scanf("%d",&x);
+		a[x]++;
+	}
+	for(int i=1;i<=maxn;i++){//从小到大排序
+		while(a[i]>0){//可能有重复数据 
+			printf("%d ",i);
+			a[i]--;
+		}
+	}
+	return 0;
+}
