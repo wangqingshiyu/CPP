@@ -1,0 +1,40 @@
+#include <cstdio>
+#include <iostream>
+#include <string>
+#include <cmath>
+using namespace std;
+int main(){
+//    freopen("data.txt","r",stdin);
+    string s="";
+    char c;
+    int a1,b1,a2,b2;
+    a1=a2=b1=b2=0;
+    while(scanf("%c",&c) !='E'){
+        if(c=='E')
+            break;
+        s+=c;
+        if(c=='W')
+            a1++;
+        if(c=='L')
+            b1++;
+        if( (abs(a1-b1) >= 2) && ( (a1 >= 11) || (b1 >= 11)) ){//超过2点或2点以上，并且有人达到11点
+            printf("%d:%d\n", a1, b1);
+            a1=b1=0;
+        }
+    }
+    printf("%d:%d\n\n", a1, b1);
+    
+    int len=s.size();
+    for(int i=0; i<=len-1; i++){
+        if(s[i]=='W')
+            a2++;
+        if(s[i]=='L')
+            b2++;
+        if( (abs(a2-b2) >= 2) && ( (a2 >= 21) || (b2 >= 21)) ){
+            printf("%d:%d\n", a2, b2);
+            a2=b2=0;
+        }
+    }
+    printf("%d:%d", a2, b2);
+    return 0;
+}
