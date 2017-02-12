@@ -1,0 +1,43 @@
+#include <cstdio>
+#include <iostream>
+#include <algorithm>
+using namespace std;
+const int maxn=5000+10;
+struct apple{
+    int li;
+    double d;
+};
+apple app[maxn];
+
+int my_comp(const apple &a,const apple &b){//按照li从小到大排序，如果li相同，则按d从小到大排 
+    if(a.li<b.li)
+        return 1;
+    if(a.li>b.li)
+        return 0;
+        //下列为a.li==b.li 
+    if(a.d<b.d)
+        return 1;
+    return 0;//a.d>=b.d
+}
+
+int main(){
+    //freopen("data.in","r",stdin); 
+    int n,s;
+    double a,b;
+    cin>>n>>s;
+    cin>>a>>b;
+    double h=a+b;
+    for(int i=1;i<=n;i++)
+        scanf("%lf %d",&app[i].d,&app[i].li);
+    sort(app+1,app+n+1,my_comp);
+    int ans=0,k=1;
+    while(s-app[k].li>=0 && k<=n){
+        if(app[k].d<=h){    
+            ans++;
+            s=s-app[k].li;
+        }
+        k++;
+    }
+    cout<<ans;
+    return 0;
+}
