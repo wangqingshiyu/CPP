@@ -1,0 +1,41 @@
+#include <cstdio>
+#include <iostream>
+#include <cstring>
+using namespace std;
+int a[10000];
+bool book[20010];
+int k;
+void cs(){//初始化，用筛法先得出全部素数
+    memset(book,-1,sizeof(book));
+    int p=20000;
+    for(int i=2;i*i<p;i++){
+        if(book[i]){
+            for(int j=2;j*i<p;j++)
+                book[j*i]=0;
+        }
+    }
+    k=1;
+    for(int i=2;i<p;i++)
+        if(book[i])
+            a[k++]=i;
+    k--;//恢复到最后一个数    
+}
+
+int main(){
+    cs();
+    int n;
+    cin>>n;
+    int t=1;
+    while(a[t]+4<n && t<k){//最小的质数是2
+        t++;
+    }
+    for(int i=1;i<=t;i++)
+        for(int j=1;j<=t;j++){
+            for(int p=1;p<=t;p++)
+                if(a[i]+a[j]+a[p]==n){
+                    printf("%d %d %d",a[i],a[j],a[p]);
+                    return 0;
+                }
+        }
+    return 0;
+}
