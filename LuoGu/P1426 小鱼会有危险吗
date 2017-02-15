@@ -1,0 +1,20 @@
+//题目有点坑，其实准确的意思是，进入探测区后，有1秒的时间逃跑，如果这一秒后，能逃掉，没危险，没逃掉，有危险。
+#include <cstdio>
+#include <iostream>
+using namespace std;
+int main(){
+    double s,x;
+    double v=7.0;
+    cin>>s>>x;
+    double sum=0;
+    while(sum<s-x){//还未进入探测区，一直向前。 
+            sum+=v;
+            v=v*0.98;
+    }
+    sum+=v;//游多1秒 
+    if(sum>s+x)
+        cout<<"n";
+    else
+        cout<<"y";
+    return 0;
+}
