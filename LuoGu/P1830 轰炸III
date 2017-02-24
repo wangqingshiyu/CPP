@@ -1,0 +1,31 @@
+#include <cstdio>
+#include <iostream>
+#include <cstring>
+using namespace std;
+int a[110][110];
+int b[110][110];
+int main(){
+	int n, m, x, y;
+	cin>>n>>m>>x>>y;
+	memset(a,-1,sizeof(a)); //初始化 
+	memset(b,0,sizeof(b));
+	for(int i=1; i<=x; i++){
+		int x1, y1, x2, y2;
+		cin>>x1>>y1>>x2>>y2;
+		for(int h=x1; h<=x2; h++)
+			for(int l=y1; l<=y2; l++){
+				a[h][l]=i;
+				b[h][l]++;
+			}
+	}
+	for(int i=1; i<=y; i++){
+		int x3, y3;
+		cin>>x3>>y3;
+		if(a[x3][y3]==-1)
+			cout<<'N'<<endl;
+		else
+			cout<<'Y'<<' '<<b[x3][y3]<<' '<<a[x3][y3]<<endl;
+	}
+	
+	return 0;
+}
