@@ -1,0 +1,19 @@
+#include <iostream>
+#include <string>
+#include <algorithm>
+using namespace std;
+int main(){
+	const int maxn=100;
+	string s[maxn+10], st;
+	int k=0;
+	while(cin>>st){
+		s[k++]=st;
+	}
+	sort(s+0, s+k);
+	cout<<s[0]<<endl;//第一个肯定不会重复 
+	for(int i=1; i<k; i++){//后面不重复的才输出 
+		if(s[i]!=s[i-1])
+			cout<<s[i]<<endl;
+	}
+	return 0;
+}
