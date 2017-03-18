@@ -1,0 +1,30 @@
+#include <iostream>
+#include <algorithm>
+#include <string>
+#include <cstdio>
+using namespace std;
+
+struct person{
+	string sex;
+	double h;
+}per[50];
+
+bool cmp(person x, person y){
+	return x.h<y.h;
+}
+
+int main(){
+//	freopen("data.txt","r",stdin);
+	int n;
+	cin>>n;
+	for(int i=1; i<=n; i++)
+		cin>>per[i].sex>>per[i].h;
+	sort(per+1, per+n+1, cmp);
+	for(int i=1; i<=n; i++) //男生从矮到高 
+		if(per[i].sex=="male")
+			printf("%.2f ",per[i].h);
+	for(int i=n; i>=1; i--) // 女生从高到矮 
+		if(per[i].sex=="female")
+			printf("%.2f ",per[i].h);
+	return 0;
+}
