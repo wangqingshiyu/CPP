@@ -1,0 +1,23 @@
+#include <iostream>
+#include <cstring>
+#include <cstdio>
+using namespace std;
+int main(){
+	//freopen("data.txt","r",stdin);
+	int book[1010], a[110], n;
+	memset(book, 0, sizeof(book));
+	cin>>n;
+	for(int i=1; i<=n; i++){
+		cin>>a[i];
+		book[a[i]]++;
+	}
+	int ans=0;
+	for(int i=1; i<=1000; i++)
+		if(book[i]) // 非0为T 
+			ans++;
+	cout<<ans<<endl;
+	for(int i=1; i<=1000; i++)
+		if(book[i]) // 非0为T 
+			cout<<i<<" ";
+	return 0;
+}
