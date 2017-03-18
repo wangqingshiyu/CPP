@@ -1,0 +1,39 @@
+#include <iostream>
+#include <algorithm>
+#include <string>
+#include <cstdio>
+using namespace std;
+const int maxn=100;
+struct person{
+	string id; //病号 
+	int old; //年龄 
+	int record; //登记顺序 
+}per[maxn+10];
+
+bool cmp1(person x, person y){ //老年人的排序方法：按照年龄从大到小，登记从先到后 
+	if(x.old!=y.old)
+		return x.old>y.old;
+	return x.record<y.record;
+}
+
+bool cmp2(person x, person y){ //非老年人的排序方法：按登记从先到后 
+	return x.record<y.record;
+}
+
+int main(){
+	//freopen("data.txt","r",stdin);
+	int n;
+	cin>>n;
+	for(int i=1; i<=n; i++){
+		cin>>per[i].id>>per[i].old;
+		per[i].record=i;
+	}
+	sort(per+1, per+n+1, cmp1); //先求老年人 
+	int k=1;
+	while(per[k].old>=60) //找到非老年人 
+		k++;
+	sort(per+k, per+n+1, cmp2);
+	for(int i=1; i<=n; i++)
+		cout<<per[i].id<<endl;
+	return 0;
+}
