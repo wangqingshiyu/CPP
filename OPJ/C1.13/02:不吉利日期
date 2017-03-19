@@ -1,0 +1,33 @@
+#include <iostream>
+using namespace std;
+
+int f(int k, int month){
+	int day;
+	int xq[50]; 
+	switch(month){ // 每年的月份 
+		case 2: day=28; break;
+		case 4:
+		case 6:
+		case 9:
+		case 11: day=30; break;
+		default : day=31;	
+	}
+	for(int i=1; i<=day; i++){
+		xq[i]=k;
+		k++;
+		if(k==8)
+			k=1;
+	}
+	if(xq[13]==5)
+		cout<<month<<endl;
+	return k;
+}
+
+int main(){
+	int w;
+	cin>>w;
+	for(int i=1; i<=12; i++){ //每个月一次 
+		w=f(w, i); //返回下个月1号的星期 
+	}
+	return 0;
+}
