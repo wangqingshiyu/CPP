@@ -1,0 +1,31 @@
+#include <iostream>
+#include <cstring>
+#include <cstdio>
+using namespace std;
+int main(){
+	int w[1010], nc[110]; // 单词和内存
+	int m, n;
+	memset(nc,-1,sizeof(nc)); //初始化 
+	cin>>m>>n;
+	int ans=0;
+	int k=1; //插入的位置 
+	for(int i=1; i<=n; i++){
+		cin>>w[i];
+		bool pd=false; //初始化不在 
+		for(int j=1; j<=m; j++) //查找 
+			if(nc[j]==w[i]){
+				pd=true;
+				break;
+			}
+		if(!pd){ //查找不到 
+			ans++;
+			nc[k]=w[i];
+			k++;
+			if(k>m){
+				k=1;
+			}
+		}
+	} 
+	cout<<ans;
+	return 0;
+}
