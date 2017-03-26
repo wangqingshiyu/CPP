@@ -1,0 +1,33 @@
+#include <iostream>
+#include <algorithm>
+#include <cstdio>
+using namespace std;
+
+struct per{
+    int num;
+    int score;
+};
+
+per ren[5000+10];
+
+bool cmp(per x, per y){
+    if(x.score != y.score)
+        return x.score>y.score;
+    return x.num<y.num;
+}
+
+int main(){
+    int n,m;
+    cin>>n>>m;
+    int k=m*15/10;
+    for(int i=1; i<=n; i++)
+        scanf("%d %d", &ren[i].num, &ren[i].score);
+    sort(ren+1, ren+n+1, cmp);
+    while(ren[k+1].score==ren[k].score && k+1<=n){ //如果有相同分数的 
+        k++;
+    }
+    printf("%d %d\n", ren[k].score, k);
+    for(int i=1; i<=k; i++)
+        printf("%d %d\n", ren[i].num, ren[i].score);
+    return 0;
+}
