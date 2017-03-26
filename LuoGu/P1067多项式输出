@@ -1,0 +1,52 @@
+//此题非常多陷阱数据，尤其要注意1，-1，第一项1和-1，还有0
+#include <iostream>
+#include <cstdio>
+using namespace std;
+int main(){
+	int a[110];
+	int n;
+	cin>>n;
+	for(int i=n; i>=0; i--) // i 次方的系数 
+		cin>>a[i];
+	if(a[n]!=1 && a[n]!=-1)
+		cout<<a[n]<<"x^"<<n; //第一项
+	else{
+		if(a[n]==1)
+			cout<<"x^"<<n;
+		else
+			cout<<"-x^"<<n;
+	}
+	for(int i=n-1; i>=2; i--){
+		if(a[i]==0) //系数为0的跳过 
+			continue;
+		if(a[i]==-1){
+			cout<<"-x^"<<i;
+			continue;
+		}
+		if(a[i]==1){
+			cout<<"+x^"<<i;
+			continue;
+		}
+		if(a[i]>0)  //系数为正的，要加上+,负的自带- 
+			cout<<"+";
+		cout<<a[i]<<"x^"<<i; //i 次方
+		
+	}
+	if(a[1]!=0){ //系数不为0 
+		if(a[1]!=-1 && a[1]!=1){
+			if(a[1]>0)
+				cout<<"+";
+			cout<<a[1]<<"x";
+		}
+		if(a[1]==-1)
+			cout<<"-x";
+		if(a[1]==1)
+			cout<<"+x";
+	}
+	if(a[0]!=0){ //常数项 
+		if(a[0]>0)
+			cout<<"+";
+		cout<<a[0];
+	}
+	return 0;
+} 
