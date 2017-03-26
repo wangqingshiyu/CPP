@@ -1,0 +1,31 @@
+#include <iostream>
+#include <cstdio>
+#include <algorithm>
+#include <string>
+using namespace std;
+
+struct pri{
+	int no; //编号 
+	string s; //票数 
+	int len; //长度 
+};
+struct pri p[25];
+
+bool cmp(pri x, pri y){
+	if(x.len != y.len)
+		return x.len>y.len;
+	return x.s>y.s;  //返回票数大的，实际上就是字符串字典序大的 
+}
+
+int main(){
+	int n;
+	cin>>n;
+	for(int i=1; i<=n; i++){
+		p[i].no=i;
+		cin>>p[i].s;
+		p[i].len=p[i].s.size();
+	}	 
+	sort(p+1, p+n+1, cmp);
+	cout<<p[1].no<<"\n"<<p[1].s;
+	return 0;
+}
