@@ -1,0 +1,37 @@
+#include <iostream>
+#include <cstdio>
+#include <algorithm>
+using namespace std;
+
+struct cj{
+	double yw;
+	double sx;
+	double yy;
+	int id; 
+	double zf;
+};
+cj stu[310];
+
+bool cmp(cj x, cj y){
+	if(x.zf!=y.zf) //先判断总分 
+		return x.zf>y.zf;
+	if(x.yw!=y.yw) //再判断语文 
+		return x.yw>y.yw;
+	return x.id<y.id;
+}
+
+int main(){
+	freopen("data.txt","r",stdin);
+	int n;
+	cin>>n;
+	for(int i=1; i<=n; i++){
+		cin>>stu[i].yw>>stu[i].sx>>stu[i].yy;
+		stu[i].id=i;
+		stu[i].zf=stu[i].yw+stu[i].sx+stu[i].yy;
+	}
+	sort(stu+1, stu+n+1, cmp);
+	for(int i=1; i<=4; i++)
+		cout<<stu[i].id<<' '<<stu[i].zf<<endl;
+	cout<<stu[5].id<<' '<<stu[5].zf;
+	return 0;
+}
