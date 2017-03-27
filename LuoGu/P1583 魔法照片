@@ -1,0 +1,37 @@
+#include <iostream>
+#include <cstdio>
+#include <algorithm>
+using namespace std;
+const int maxn=20000;
+struct st{
+	int w;
+	int num;
+};
+struct st s[maxn+10];
+
+bool cmp(st x, st y){
+	if(x.w!=y.w)
+		return x.w>y.w;
+	return x.num<y.num;  //编号，先输入的排前面 
+}
+
+int main(){
+	freopen("data.txt","r",stdin);
+	int n, k;
+	cin>>n>>k;
+	int e[11];
+	for(int i=1; i<=10; i++) // e的权值 
+		cin>>e[i];
+	for(int i=1; i<=n; i++){
+		scanf("%d", &s[i].w);
+		s[i].num=i; //编号 
+	}
+	sort(s+1, s+n+1, cmp);
+	for(int i=1; i<=n; i++){ 
+		s[i].w+=e[(i-1)%10+1]; //加上附加权值 
+	}
+	sort(s+1, s+n+1, cmp);
+	for(int i=1; i<=k; i++)
+		printf("%d ", s[i].num);
+	return 0;
+}
