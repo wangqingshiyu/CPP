@@ -1,0 +1,24 @@
+#include <cstdio>
+#include <iostream>
+#include <algorithm>
+using namespace std;
+int main(){
+	const int maxn=10000+10;
+	int a[maxn];
+	int n, k;
+	cin>>n>>k;
+	for(int i=1; i<=n; i++)
+		cin>>a[i];
+	sort(a+1, a+n+1); // 默认从小到大排序 
+	int m=a[n-k+1]-a[k];
+	for(int i=2; i*i<=m; i++){
+		if(m%i==0){
+			cout<<"NO\n";
+			cout<<m;
+			return 0;
+		}
+	}
+	cout<<"YES\n";
+	cout<<m;
+	return 0;
+}
