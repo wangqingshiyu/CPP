@@ -1,0 +1,67 @@
+#include <iostream>
+#include <cstdio>
+#include <algorithm>
+using namespace std;
+const int maxn=200000;
+struct xs{
+    int id; //一开始的编号 
+    int s;  //积分 
+    int w;    //实力 
+};
+xs p[maxn+10], a[maxn+10], b[maxn+10];
+
+bool cmp(xs x, xs y){
+    if(x.s!=y.s)
+        return x.s>y.s;
+    return x.id<y.id;
+}
+
+void gb(int n){ //二路归并 
+    int i, j, k;
+    i=j=k=1;
+    while(i<=n && j<=n){//没有一列合并完 
+        if( (a[i].s>b[j].s) || (a[i].s==b[j].s && a[i].id<b[j].id) ){
+            p[k++]=a[i++];
+        }
+        else{
+            p[k++]=b[j++];
+        }
+    }
+    while(i<=n){
+        p[k++]=a[i++];
+    }
+    while(j<=n){
+        p[k++]=b[j++];
+    }
+}
+
+int main(){
+   // freopen("data.in","r",stdin);
+    int n, r, q;
+    cin>>n>>r>>q;
+    for(int i=1; i<=2*n; i++){
+        scanf("%d", &p[i].s);
+        p[i].id=i;
+    }
+    for(int i=1; i<=2*n; i++)
+        scanf("%d", &p[i].w);
+    sort(p+1, p+2*n+1, cmp); //按照积分排名 
+    for(int i=1; i<=r; i++){ //r轮回 
+        for(int j=1; j<=n; j++){
+            if(p[2*j-1].w>p[2*j].w){
+                p[2*j-1].s++;
+                a[j]=p[2*j-1]; //结构体赋值 
+                b[j]=p[2*j];
+            }
+            else{ //p[2*j-1].w<p[2*j].w 不存在相等实力 
+                p[2*j].s++;
+                a[j]=p[2*j];
+                b[j]=p[2*j-1];
+            }
+        }
+        // 归并两路 a,b;  
+        gb(n);  //此处用二路归并，时间复杂度是n, 但是用快排是nlogn ，会超时。
+    }
+    cout<<p[q].id;
+    return 0;
+}
