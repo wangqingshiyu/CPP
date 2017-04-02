@@ -1,0 +1,48 @@
+#include <iostream>
+#include <algorithm>
+#include <cmath>
+#include <cstdio>
+using namespace std;
+struct hs{
+	int hx, hy;
+	int num;
+};
+struct hs a[410];
+
+bool cmp(hs x, hs y){
+	return x.num>y.num;  //题目中说明没有相等的 
+}
+
+int main(){
+	freopen("data.txt","r",stdin);
+	int m, n, k;
+	cin>>m>>n>>k;
+	int total=m*n;
+	for(int i=1; i<=total; i++){
+		cin>>a[i].num;
+		a[i].hx=(i-1)/n+1; //行 
+		a[i].hy=(i-1)%n+1; //列 
+	}
+	sort(a+1, a+total+1, cmp);
+	int t=1, p=1;
+	int x=1, y=a[p].hy; //第一步，跳到该列的第一行 
+	int ans=0; //挖到的花生数量 
+	while(t<k){
+		if(a[p].num>0 && t+(int)abs(a[p].hx-x)+(int)abs(a[p].hy-y)<k){
+			t+=(int)abs(a[p].hx-x)+(int)abs(a[p].hy-y); //跳到目的地的时间 
+			t++; //挖花生 
+			x=a[p].hx;
+			y=a[p].hy;
+			if(t+x<=k){// 够时间出去 
+				ans+=a[p].num;
+				p++;
+			}
+			else //如果不够时间出去，此次挖花生行动取消,并且结束 
+				break;
+		}
+		else
+			break;
+	}
+	cout<<ans;
+	return 0;
+}
