@@ -1,0 +1,32 @@
+#include <cstdio>
+#include <iostream>
+using namespace std;
+int main(){
+	int a, b, c;
+	a=b=c=0;
+	int k=1;
+	while(cin>>a>>b>>c && !(a==0 && b==0 && c==0)){
+		cout<<"Case "<<k++<<": ";
+		if(a<b)
+			cout<<"0.";	
+		else
+			cout<<a/b<<".";
+		a=a%b*10;
+		for(int i=1; i<c; i++){ //精确到c位，那么第c位是四舍五入的,因此需要特判 
+			cout<<a/b;
+			a=a%b*10;
+			if(!a){//整除了
+				for(int j=i+1; j<=c; j++)
+					cout<<"0";
+				break;
+			}
+		}
+		int t=a/b;
+		a=a%b*10;
+		if(a/b>=5)
+			t++;
+		cout<<t;
+		cout<<endl;
+	}
+	return 0;
+}
