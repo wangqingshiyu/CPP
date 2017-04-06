@@ -1,0 +1,51 @@
+//纯模拟方法，先排序，更新开始时间和结束时间，用来计算时间段。 另外还有一种用数组的方法更加简单粗暴，类似【校门外的树】的解题方法。
+#include <cstdio>
+#include <iostream>
+#include <algorithm>
+using namespace std;
+const int maxn=5000;
+struct cow{
+    int l; //开始时间 
+    int r; //结束时间 
+};
+cow c[maxn+10];
+
+bool cmp(const cow &x, const cow &y){
+    if(x.l!=y.l)
+        return x.l<y.l;
+    return x.r<y.r;
+}
+
+int main(){
+//    freopen("data.in","r",stdin);
+    int n;
+    cin>>n;
+    for(int i=1; i<=n; i++)
+        scanf("%d %d", &c[i].l, &c[i].r);
+    sort(c+1, c+n+1, cmp);
+    int start=c[1].l, end=c[1].r; //起始位置 
+    int max1=c[1].r-c[1].l, max2=0; //最长挤奶时间，最长没人挤奶时间 
+    int time1, time2;//挤奶时间，没人挤奶时间 
+    for(int i=2; i<=n; i++){
+        if(c[i].l<=end){//时间重叠，即连续 
+            if(end<c[i].r){//比之前结束得更晚,更新结束时间 
+            end=c[i].r;
+            time1=end-start;
+            if(time1>max1)
+                max1=time1;
+            }
+        }
+        else{//时间断开了 
+            time2=c[i].l-end; //间断时间 
+            if(time2>max2)
+                max2=time2;
+            start=c[i].l;
+            end=c[i].r;
+            time1=end-start;
+            if(time1>max1)
+                max1=time1;
+        }
+    }
+    cout<<max1<<" "<<max2;
+    return 0;
+}
