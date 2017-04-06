@@ -1,0 +1,52 @@
+#include <iostream>
+#include <cstdio>
+#include <cstring>
+#include <string>
+using namespace std;
+
+struct person{
+    string name;
+    int send;
+    int rev;
+};
+
+int main(){
+//    freopen("data.in","r",stdin);
+    person ren[20];
+    int np;
+    cin>>np;
+    for(int i=1;i<=np;i++){
+        cin>>ren[i].name;
+        ren[i].send=ren[i].rev=0;
+    }
+    string send_name,rev_name;
+    int send_money,rev_num;
+    while(cin>>send_name){// 有输入的人 
+        cin>>send_money>>rev_num;
+        if(rev_num==0)// 如果收钱人为0,此轮结束 
+            continue;
+        for(int i=1; i<=np; i++){ //匹配送钱的人 
+            if(ren[i].name==send_name){
+                ren[i].send-=send_money;  //送出的钱
+                ren[i].rev+=send_money%rev_num;  //不能整除时，退回的钱 
+                break;
+            }
+        }
+        int k=rev_num; // 收钱的人数 
+        while(k>0){ //收钱的人
+            cin>>rev_name;
+            for(int i=1; i<=np; i++){ // 匹配收钱的人 
+                if(ren[i].name==rev_name){
+                    ren[i].rev+=send_money/rev_num;
+                    break;
+                }
+            }    
+            k--;
+        }
+    }
+    // 输出 
+    for(int i=1; i<=np; i++){
+        cout<<ren[i].name<<" "<<ren[i].send+ren[i].rev<<endl;
+    }
+    return 0;
+}
