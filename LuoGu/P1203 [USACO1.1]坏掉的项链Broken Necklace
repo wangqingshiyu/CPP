@@ -1,0 +1,67 @@
+//解题思路是，将断开的地方串联成一个字符串，枚举每个断开的字符串收集的珠子的数量，求最大的数
+#include <cstdio>
+#include <iostream>
+#include <string>
+#include <cstring>
+using namespace std;
+
+int n;
+char s[1000], st[1000];
+
+int f(int x){
+	int sum=0;
+	for(int i=1; i<=n; i++){//断开后组成的字符串
+    st[i]=s[(x+i-1)%n+1];
+	}
+	int i=1, j=n;
+	char a='f', b='f'; //表明还未决定颜色
+  //从左往右算	
+  while(st[i]=='w'){//通用		
+    sum++;
+		i++;
+	}
+	if(a=='f'){
+		a=st[i];
+		sum++;
+	}
+	while((st[i+1]==a || st[i+1]=='w') && i<n){
+		sum++;
+		i++;
+	}
+	//从右往左 
+	while(st[j]=='w'){
+		sum++;
+		j--;
+	}
+	if(b=='f'){
+		b=st[j];
+		sum++;
+	}
+	while((st[j-1]==b || st[j-1]=='w') && j>1){
+		sum++;
+		j--;
+	}
+	
+	if(sum>n)
+		sum=n;
+	return sum;
+}
+
+int main(){
+	freopen("data.txt", "r", stdin);
+	cin>>n;
+	for(int i=1; i<=n; i++)
+		cin>>s[i];
+	int max=-1, ans, t;	
+	for(int i=1; i<=n; i++)
+		f(i);
+	for(int i=1; i<=n; i++){
+		t=f(i);
+		if(t>max){
+			max=t;
+			ans=i;
+		}
+	}
+	cout<<max;
+	return 0;
+}
