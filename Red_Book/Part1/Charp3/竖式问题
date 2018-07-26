@@ -1,0 +1,32 @@
+#include <iostream>
+#include <cstring>
+#include <iomanip>
+using namespace std;
+int main(){
+	char s[20], buf[100];
+	int x, y, z, ans = 0;
+	cin >> s;
+	for(int i=111; i<=999; i++){
+		for(int j=11; j<=99; j++){
+			x = i*(j%10);
+			y = i*(j/10);
+			z = y*10+x;
+			sprintf(buf, "%d%d%d%d%d", i, j, x, y, z);  // ×ª³É×Ö·ûÐÍ
+			bool flag = true; 
+			for(int k=0; k<strlen(buf); k++)
+				if(strchr(s, buf[k]) == NULL)
+					flag = false;
+			if(flag){
+				cout << "<" << ++ans << ">" << endl;
+				cout << setw(5) << i << endl;
+				cout << 'X' << setw(4) << j << endl;
+				cout << "-----" << endl;
+				cout << setw(5) << x << endl;
+				cout << setw(4) << y << endl;
+				cout << "-----" << endl;
+				cout << setw(5) << z << endl;
+			}
+		}
+	}
+	return 0;
+}
