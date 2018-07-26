@@ -1,0 +1,21 @@
+#include <iostream>
+#include <cstring>
+#include <cstdio>
+using namespace std;
+int main(){
+	freopen("test.txt", "r", stdin);
+	char ch;
+	bool flag = true;
+	while((ch=getchar()) != EOF){ // ch=getchar()需要括号，因为优先级比！=低 
+		if(ch=='"'){
+			if(flag)
+				cout << "``";
+			else
+				cout << "''";
+			flag = ! flag;
+		}	
+		else
+			cout << ch;
+	}
+	return 0;
+}
