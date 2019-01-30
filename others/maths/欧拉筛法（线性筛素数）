@@ -1,0 +1,29 @@
+#include <bits/stdc++.h>
+using namespace std;
+int prime[1000000];
+bool book[10000000];
+
+void ol(int n){
+	memset(book, true, sizeof(book));
+	int cnt = 0;
+	for(int i=2; i<=n; i++){
+		if(book[i])
+			prime[++cnt] = i;   //统计现有素数
+		for(int j=1; j<=cnt; j++){
+			if(i*prime[j]>n)    //超过范围
+				break;
+			book[i*prime[j]] = false;   // i是【i*prime[j]】的最小因子，必然不是素数，筛掉
+			if(i%prime[j]==0)  // prime[j]是i的因子，那么i必然不是最小因子，必然在之前就被筛掉了。
+				break;
+		}
+	}
+}
+
+int main(){
+	int n;
+	cin >> n;
+	ol(n);
+	for(int i=2; i<=n; i++)
+		if(book[i])	printf("%10d", i);
+	return 0;
+}
